@@ -13,7 +13,7 @@ jobs:
               uses: "hacs/action@main"
               with:
                   category: "plugin"
-                  ignore: topics
+                  ignore: topics issues information images
 #archived brands description
 #brands 	
 #description
