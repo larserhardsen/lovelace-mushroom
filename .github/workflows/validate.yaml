@@ -13,7 +13,7 @@ jobs:
               uses: "hacs/action@main"
               with:
                   category: "plugin"
-                  ignore: hacsjson
+                  ignore: topics
 #archived brands description
 #brands 	
 #description
