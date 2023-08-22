@@ -118,7 +118,7 @@ export const computeMediaDescription = (stateObj: MediaPlayerEntity): string => 
     switch (stateObj.attributes.media_content_type) {
         case "music":
         case "image":
-            secondaryTitle = stateObj.attributes.media_artist!;
+            secondaryTitle = stateObj.attributes.media_artist! + " - " + stateObj.attributes.media_title!;
             break;
         case "playlist":
             secondaryTitle = stateObj.attributes.media_playlist!;
