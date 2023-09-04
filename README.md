@@ -1,4 +1,4 @@
-# 🍄 Mushroom
+# 🍄 Mushroom (Lars)
 
 [![hacs][hacs-badge]][hacs-url]
 [![release][release-badge]][release-url]

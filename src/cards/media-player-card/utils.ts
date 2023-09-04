@@ -37,11 +37,11 @@ export function computeMediaNameDisplay(
     entity: MediaPlayerEntity
 ): string {
     let name = config.name || entity.attributes.friendly_name || "";
-    if (![UNAVAILABLE, UNKNOWN, OFF].includes(entity.state) && config.use_media_info) {
-        if (entity.attributes.media_title) {
-            name = entity.attributes.media_title;
-        }
-    }
+    // if (![UNAVAILABLE, UNKNOWN, OFF].includes(entity.state) && config.use_media_info) {
+    //     if (entity.attributes.media_title) {
+    //         name = entity.attributes.media_title;
+    //     }
+    // }
     return name;
 }
 
