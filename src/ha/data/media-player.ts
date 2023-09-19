@@ -142,5 +142,5 @@ export const computeMediaDescription = (stateObj: MediaPlayerEntity): string => 
             secondaryTitle = stateObj.attributes.app_name || "";
     }
 
-    return secondaryTitle;
+    return secondaryTitle.replace('\\','');
 };
