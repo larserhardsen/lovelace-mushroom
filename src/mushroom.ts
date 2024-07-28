@@ -23,4 +23,9 @@ import "./cards/title-card/title-card";
 import "./cards/update-card/update-card";
 import "./cards/vacuum-card/vacuum-card";
 
-console.info(`%c🍄 Mushroom 🍄 - ${version}`, "color: #ef5350; font-weight: 700;");
+import "./badges/template/template-badge";
+
+console.info(
+  `%c🍄 Mushroom 🍄 - ${version}`,
+  "color: #ef5350; font-weight: 700;"
+);
