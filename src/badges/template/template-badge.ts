@@ -206,7 +206,7 @@ export class HuiEntityBadge extends LitElement implements LovelaceBadge {
     const label = this.getValue("label");
     const picture = this.getValue("picture");
 
-    const hasContent = !!content;
+    const hasInfo = !!content;
     const hasIcon = !!icon || !!picture;
 
     const style = {};
@@ -220,8 +220,8 @@ export class HuiEntityBadge extends LitElement implements LovelaceBadge {
       <div
         style=${styleMap(style)}
         class="badge ${classMap({
-          "content-only": (!hasIcon && hasContent) ?? false,
-          "icon-only": (!hasContent && hasIcon) ?? false,
+          "no-info": !hasInfo,
+          "no-icon": !hasIcon,
         })}"
         @action=${this._handleAction}
         .actionHandler=${actionHandler({
@@ -246,9 +246,9 @@ export class HuiEntityBadge extends LitElement implements LovelaceBadge {
               : nothing}
         ${content
           ? html`
-              <span class="content">
-                ${label ? html`<span class="name">${label}</span>` : nothing}
-                <span class="state">${content}</span>
+              <span class="info">
+                ${label ? html`<span class="label">${label}</span>` : nothing}
+                <span class="content">${content}</span>
               </span>
             `
           : nothing}
@@ -289,14 +289,23 @@ export class HuiEntityBadge extends LitElement implements LovelaceBadge {
         align-items: center;
         justify-content: center;
         gap: 8px;
-        height: 36px;
-        min-width: 36px;
+        height: var(--ha-badge-size, 36px);
+        min-width: var(--ha-badge-size, 36px);
         padding: 0px 8px;
         box-sizing: border-box;
         width: auto;
-        border-radius: 18px;
-        background-color: var(--card-background-color, white);
+        border-radius: var(
+          --ha-badge-border-radius,
+          calc(var(--ha-badge-size, 36px) / 2)
+        );
+        background: var(
+          --ha-card-background,
+          var(--card-background-color, white)
+        );
+        -webkit-backdrop-filter: var(--ha-card-backdrop-filter, none);
+        backdrop-filter: var(--ha-card-backdrop-filter, none);
         border-width: var(--ha-card-border-width, 1px);
+        box-shadow: var(--ha-card-box-shadow, none);
         border-style: solid;
         border-color: var(
           --ha-card-border-color,
@@ -320,7 +329,7 @@ export class HuiEntityBadge extends LitElement implements LovelaceBadge {
       [role="button"]:focus {
         outline: none;
       }
-      .content {
+      .info {
         display: flex;
         flex-direction: column;
         align-items: flex-start;
@@ -328,7 +337,7 @@ export class HuiEntityBadge extends LitElement implements LovelaceBadge {
         padding-inline-end: 4px;
         padding-inline-start: initial;
       }
-      .name {
+      .label {
         font-size: 10px;
         font-style: normal;
         font-weight: 500;
@@ -336,7 +345,7 @@ export class HuiEntityBadge extends LitElement implements LovelaceBadge {
         letter-spacing: 0.1px;
         color: var(--secondary-text-color);
       }
-      .state {
+      .content {
         font-size: 12px;
         font-style: normal;
         font-weight: 500;
@@ -360,15 +369,15 @@ export class HuiEntityBadge extends LitElement implements LovelaceBadge {
         object-fit: cover;
         overflow: hidden;
       }
-      .badge.icon-only {
+      .badge.no-info {
         padding: 0;
       }
-      .badge:not(.icon-only) img {
+      .badge:not(.no-icon):not(.no-info) img {
         margin-left: -6px;
         margin-inline-start: -6px;
         margin-inline-end: initial;
       }
-      .badge.content-only .content {
+      .badge.no-icon .info {
         padding-right: 4px;
         padding-left: 4px;
         padding-inline-end: 4px;
